@@ -1,0 +1,22 @@
+import React from 'react'
+import './App.css'
+import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom';
+
+const AddtoCart = () => {
+
+    const cartSelector = useSelector((state)=>state.cart.items);
+    console.log(cartSelector.length);
+
+    return (
+        <div className="cart">
+            <Link to="/cart">
+                <img src="data:image/png;base64,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" alt="cart" />
+                <span className="cart-count">{cartSelector.length?cartSelector.length:0}</span>
+
+            </Link>
+        </div>
+    )
+}
+
+export default AddtoCart
