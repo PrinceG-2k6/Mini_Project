@@ -1,0 +1,98 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('bg.jpeg');
+    background-size: cover;
+    margin: 0;
+}
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: black;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0,0.7);
+}
+form {
+    background: rgba(2, 2, 2, 0.6);
+    padding: 40px;
+    padding-top: 20px;
+    border-radius: 10px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    z-index: 1;
+    color: rgb(240, 236, 207);
+    
+}
+
+h1 {
+    text-align: center;
+    font-size: 3rem;
+    color: rgb(231, 211, 183);
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1rem;
+    font-weight: 400;
+}
+input[type="email"],
+input[type="password"]{
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+input:focus {
+    border-color: #4CAF50;
+}
+
+@media (max-width: 600px) {
+    form {
+        width: 90%;
+        padding: 10px;
+    }
+}
+.student {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.student a {
+    display: inline-block;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: white;
+    background-color: #007BFF;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.student a:hover {
+    background-color: #0056b3;
+}
