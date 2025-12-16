@@ -1,0 +1,12 @@
+Code Editor:
+    VS Code
+    OR
+    Jupyter
+
+
+Libraries : 
+
+    pandas
+    numpy
+    matplotlib
+    seaborn
