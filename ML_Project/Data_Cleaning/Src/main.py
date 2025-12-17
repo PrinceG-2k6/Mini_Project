@@ -30,39 +30,41 @@ def menu():
     print("4. Handle outliers")
     print("5. Data visualization")
     print("6. Save cleaned data")
-    print("0. Exit")
+    print("7. Exit")
 
 
 def show_info(df):
     print("\nDataset Info : \n")
     print(df.info())
-    print("\nMissing Values:")
-    print(df.isnull().sum())
+    print("\nMissing Values: \n")
+    print(df.isna().sum()[df.isna().sum() > 0])
 
 while True:
     menu()
-    choice = int(input("Enter choice: "))
+    choice = input("Enter choice: ")
 
-    if choice == 0:
+    if choice == '0':
         pd.set_option('display.max_rows', None)
         print(df)
-    elif choice == 1:
+    elif choice == '1':
         show_info(df)
-    elif choice == 2:
+    elif choice == '2':
         handle_missing(df)
-    elif choice == 3:
+    elif choice == '3':
         remove_duplicates(df)
-    elif choice == 4:
+    elif choice == '4':
         col = input("Enter column for outliers: ")
         df = handle_outliers(df, col)
-    elif choice == 5:
+    elif choice == '5':
         visualize(df)
-    elif choice == 6:
+    elif choice == '6':
         df.to_csv("data/cleaned.csv", index=False)
-    elif choice == 0:
+    elif choice == '7':
         break
+    else:
+        print("\n=================================")
+        print("Enter Choice Number Correctly!!")
+        print("=================================\n")
 
 
-pd.set_option('display.max_rows', None)
-print(df)
   
