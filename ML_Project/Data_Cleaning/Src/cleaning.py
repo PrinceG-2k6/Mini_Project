@@ -12,6 +12,13 @@ def menu1():
     print("4. Drop Missing Values")
     print("5. Back")
 
+def menu2():
+    print("\n===== Filling MISSING VALUE =====")
+    print("1. Forward Fill")
+    print("2. Backward Fill")
+    print("3. Replace NaN")
+    print("4. Back")
+
 
 def handle_missing(df):
     nan_columns_list = df.columns[df.isna().any()].tolist()
@@ -31,9 +38,11 @@ def handle_missing(df):
         if choice == '1':
             print(df[nan_columns_list])
         elif choice == '2':
-            break
+            print(df[df.isna().any(axis=1)])
         elif choice == '3':
-            break
+            menu2()
+
+            
         elif choice == '4':
             break
         elif choice == '5':
