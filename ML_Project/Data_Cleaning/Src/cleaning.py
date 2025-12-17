@@ -41,8 +41,54 @@ def handle_missing(df):
             print(df[df.isna().any(axis=1)])
         elif choice == '3':
             menu2()
-
             
+            while True:
+                ch = input("Enter choice: ")
+                if ch=='1':
+                    print("1. Row-Wise")
+                    print("2. Column-Wise")
+                    c = input("Enter choice: ")
+                    
+                    while True:
+                        if c=='1':
+                            df = df.fillna(method='ffill',axis=1)
+                            print("Missing Values are filled by forward filling row wise !!")
+                            break
+                        elif c=='2':
+                            df = df.fillna(method='ffill',axis=0)
+                            print("Missing Values are filled by forward filling column wise !!")
+                            break
+                        else:
+                            print("\n=================================")
+                            print("Enter Choice Number Correctly!!")
+                            print("=================================\n")
+
+
+                elif ch=='2':
+                    print("1. Row-Wise")
+                    print("2. Column-Wise")
+                    c = input("Enter choice: ")
+                    while True:
+                        if c=='1':
+                            df = df.fillna(method='bfill',axis=1)
+                            print("Missing Values are filled by forward filling row wise !!")
+                            break
+                        elif c=='2':
+                            df = df.fillna(method='bfill',axis=0)
+                            print("Missing Values are filled by forward filling column wise !!")
+                            break
+                        else:
+                            print("\n=================================")
+                            print("Enter Choice Number Correctly!!")
+                            print("=================================\n")
+                elif ch=='3':
+                    print(1)
+                elif ch=='4':
+                    break
+                else:
+                    print("\n=================================")
+                    print("Enter Choice Number Correctly!!")
+                    print("=================================\n")
         elif choice == '4':
             break
         elif choice == '5':
