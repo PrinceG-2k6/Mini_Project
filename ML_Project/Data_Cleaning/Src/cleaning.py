@@ -40,9 +40,10 @@ def handle_missing(df):
         elif choice == '2':
             print(df[df.isna().any(axis=1)])
         elif choice == '3':
-            menu2()
+            
             
             while True:
+                menu2()
                 ch = input("Enter choice: ")
                 if ch=='1':
                     print("1. Row-Wise")
@@ -51,11 +52,11 @@ def handle_missing(df):
                     
                     while True:
                         if c=='1':
-                            df = df.fillna(method='ffill',axis=1)
+                            df.ffill(inplace = True,axis=1)
                             print("Missing Values are filled by forward filling row wise !!")
                             break
                         elif c=='2':
-                            df = df.fillna(method='ffill',axis=0)
+                            df.ffill(inplace = True,axis=0)
                             print("Missing Values are filled by forward filling column wise !!")
                             break
                         else:
@@ -70,11 +71,11 @@ def handle_missing(df):
                     c = input("Enter choice: ")
                     while True:
                         if c=='1':
-                            df = df.fillna(method='bfill',axis=1)
+                            df.bfill(inplace = True,axis=1)
                             print("Missing Values are filled by forward filling row wise !!")
                             break
                         elif c=='2':
-                            df = df.fillna(method='bfill',axis=0)
+                            df.bfill(inplace = True,axis=0)
                             print("Missing Values are filled by forward filling column wise !!")
                             break
                         else:
