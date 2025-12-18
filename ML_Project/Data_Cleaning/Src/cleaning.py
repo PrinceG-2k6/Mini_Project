@@ -30,7 +30,6 @@ def menu2():
     print("3. Replace NaN")
     print("4. Back")
 
-
 def handle_missing(df):
     
     if not has_nan(df):
@@ -41,7 +40,7 @@ def handle_missing(df):
 
     nan_columns_list = df.columns[df.isna().any()].tolist()
 
-    print("===============")
+    print("\n===============")
     print("Missing values found in columns:")
     for i, col in enumerate(nan_columns_list, 1):
         print(f"{i}. {col}")
@@ -51,22 +50,22 @@ def handle_missing(df):
         menu1()
         choice = input("Enter choice: ")
 
-        # -------- Show Missing Columns --------
+        # ---------- Show Missing Columns ----------
         if choice == '1':
             print(df[nan_columns_list])
 
-        # -------- Show Missing Rows --------
+        # ---------- Show Missing Rows ----------
         elif choice == '2':
             print(df[df.isna().any(axis=1)])
 
-        # -------- Fill Missing Values --------
+        # ---------- Fill Missing Values ----------
         elif choice == '3':
 
             while True:
                 menu2()
                 ch = input("Enter choice: ")
 
-                # ---------- Forward Fill ----------
+                # ===== FORWARD FILL =====
                 if ch == '1':
                     print("1. Row-Wise")
                     print("2. Column-Wise")
@@ -74,14 +73,19 @@ def handle_missing(df):
 
                     try:
                         if c == '1':
-                            if df.isna().all(axis=1).any():
+                            if is_mixed_dtypes(df):
+                                raise TypeError(
+                                    "Row-wise forward fill not allowed for mixed datatypes "
+                                    "(e.g., Name → Price)."
+                                )
+                            if has_all_nan_rows(df):
                                 raise ValueError("Some rows contain all NaN values.")
 
                             df.ffill(axis=1, inplace=True)
                             print("Forward fill applied row-wise!")
 
                         elif c == '2':
-                            if df.isna().all(axis=0).any():
+                            if has_all_nan_columns(df):
                                 raise ValueError("Some columns contain all NaN values.")
 
                             df.ffill(axis=0, inplace=True)
@@ -90,10 +94,10 @@ def handle_missing(df):
                         else:
                             print("Invalid choice!")
 
-                    except ValueError as e:
+                    except (ValueError, TypeError) as e:
                         print(f"Operation not possible: {e}")
 
-                # ---------- Backward Fill ----------
+                # ===== BACKWARD FILL =====
                 elif ch == '2':
                     print("1. Row-Wise")
                     print("2. Column-Wise")
@@ -101,14 +105,19 @@ def handle_missing(df):
 
                     try:
                         if c == '1':
-                            if df.isna().all(axis=1).any():
+                            if is_mixed_dtypes(df):
+                                raise TypeError(
+                                    "Row-wise backward fill not allowed for mixed datatypes "
+                                    "(e.g., Name → Fare)."
+                                )
+                            if has_all_nan_rows(df):
                                 raise ValueError("Some rows contain all NaN values.")
 
                             df.bfill(axis=1, inplace=True)
                             print("Backward fill applied row-wise!")
 
                         elif c == '2':
-                            if df.isna().all(axis=0).any():
+                            if has_all_nan_columns(df):
                                 raise ValueError("Some columns contain all NaN values.")
 
                             df.bfill(axis=0, inplace=True)
@@ -117,10 +126,10 @@ def handle_missing(df):
                         else:
                             print("Invalid choice!")
 
-                    except ValueError as e:
+                    except (ValueError, TypeError) as e:
                         print(f"Operation not possible: {e}")
 
-                # ---------- Replace NaN ----------
+                # ===== REPLACE NaN =====
                 elif ch == '3':
 
                     if not has_nan(df):
@@ -163,14 +172,14 @@ def handle_missing(df):
                     else:
                         print("Invalid choice!")
 
-                # ---------- Back ----------
+                # ===== BACK =====
                 elif ch == '4':
                     break
 
                 else:
                     print("Invalid choice!")
 
-        # -------- Drop Missing Values --------
+        # ---------- Drop Missing Values ----------
         elif choice == '4':
 
             if not has_nan(df):
@@ -192,7 +201,7 @@ def handle_missing(df):
             else:
                 print("Invalid choice!")
 
-        # -------- Back --------
+        # ---------- Back ----------
         elif choice == '5':
             break
 
