@@ -5,6 +5,14 @@ import seaborn as sns
 
 def has_nan(df):
     return df.isna().any().any()
+def is_mixed_dtypes(df):
+    return len(set(df.dtypes.astype(str))) > 1
+
+def has_all_nan_rows(df):
+    return df.isna().all(axis=1).any()
+
+def has_all_nan_columns(df):
+    return df.isna().all(axis=0).any()
 
 
 def menu1():
