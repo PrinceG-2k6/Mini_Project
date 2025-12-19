@@ -55,21 +55,24 @@ def search_info(df):
             raise ValueError
 
         column_name = columns[col_choice - 1]
-
         value = input(f"Enter value to search in '{column_name}': ")
 
-        # Search logic
-        if df[column_name].dtype == object:
-            result = df[df[column_name].astype(str)
-                        .str.contains(value, case=False, na=False)]
-        else:
+        # -------- Search Logic --------
+        if pd.api.types.is_numeric_dtype(df[column_name]):
             try:
                 value = float(value)
                 result = df[df[column_name] == value]
-            except:
+            except ValueError:
                 print("❌ Invalid numeric value!")
-                
+                return
+        else:
+            result = df[
+                df[column_name]
+                .astype(str)
+                .str.contains(value, case=False, na=False)
+            ]
 
+        # -------- Result Check --------
         if result.empty:
             print("❌ No matching records found!")
         else:
