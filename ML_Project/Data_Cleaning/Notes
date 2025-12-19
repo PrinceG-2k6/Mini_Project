@@ -2,3 +2,6 @@
 .Can Check is it possible to ffill or bfill column or row wise due to mixed dataypes
 .Can search all row containg target value
 like searching mr will search both data "Mr Prince" and "Mr Baary"
+.Can Group Duplicate Data by its value. like We can display 2 gorups of dataframe on basis of survived:0 or survived:1
+helps to dividing dataframe into groups on basis of same value it contains. 
+.Its also in our hand to decide on which column Duplicate value should group by 

@@ -63,7 +63,7 @@ def search_info(df):
                 value = float(value)
                 result = df[df[column_name] == value]
             except ValueError:
-                print("❌ Invalid numeric value!")
+                print("Invalid numeric value!")
                 return
         else:
             result = df[
@@ -74,13 +74,13 @@ def search_info(df):
 
         # -------- Result Check --------
         if result.empty:
-            print("❌ No matching records found!")
+            print("No matching records found!")
         else:
             print("\nMatching Records:")
             print(result)
 
     except ValueError:
-        print("❌ Invalid column selection!")
+        print("Invalid column selection!")
 
 
 while True:

@@ -222,7 +222,7 @@ def print_duplicate_groups(df, group_cols):
             print(group)
 
     if not found:
-        print("✅ No duplicate groups found!")
+        print("No duplicate groups found!")
 
 
 def remove_duplicates(df):
@@ -250,11 +250,11 @@ def remove_duplicates(df):
 
                 col_name = columns[col_no - 1]
 
-                print(f"\n🔍 Grouped duplicates for column: {col_name}")
+                print(f"\nGrouped duplicates for column: {col_name}")
                 print_duplicate_groups(df, [col_name])
 
             except ValueError:
-                print("❌ Invalid column selection!")
+                print("Invalid column selection!")
 
         # -------- Multiple column grouping --------
         elif choice == '2':
@@ -269,18 +269,18 @@ def remove_duplicates(df):
                 indices = [int(i.strip()) for i in user_input.split(',')]
                 group_cols = [columns[i - 1] for i in indices]
 
-                print(f"\n🔍 Grouped duplicates for columns: {group_cols}")
+                print(f"\nThis is Data row which have same value of : {group_cols}")
                 print_duplicate_groups(df, group_cols)
 
             except:
-                print("❌ Invalid input!")
+                print("Invalid input!")
 
         # -------- Back --------
         elif choice == '3':
             break
 
         else:
-            print("❌ Enter correct choice!")
+            print("Enter correct choice!")
 
 
 def handle_outliers(df,col):
