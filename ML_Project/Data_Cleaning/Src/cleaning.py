@@ -209,21 +209,35 @@ def handle_missing(df):
             print("Invalid choice!")
 
 
-    
+def print_duplicate_groups(df, group_cols):
+    grouped = df.groupby(group_cols)
+
+    found = False
+    for key, group in grouped:
+        if len(group) > 1:
+            found = True
+            print("\n==============================")
+            print(f"Duplicate Group: {key}")
+            print("==============================")
+            print(group)
+
+    if not found:
+        print("✅ No duplicate groups found!")
+
+
 def remove_duplicates(df):
     
+    columns = df.columns.tolist()
+
     while True:
-        print("\n===== DUPLICATE CHECK MENU =====")
-        print("1. Show duplicate rows (single column)")
-        print("2. Show duplicate rows (multiple columns)")
-        print("3. Show duplicate count by column")
-        print("4. Back")
+        print("\n===== DUPLICATE CHECK (GROUP-WISE) =====")
+        print("1. Duplicate by single column")
+        print("2. Duplicate by multiple columns")
+        print("3. Back")
 
         choice = input("Enter choice: ")
 
-        columns = df.columns.tolist()
-
-        # ---------- 1. Duplicate by SINGLE column ----------
+        # -------- Single column grouping --------
         if choice == '1':
             print("\nAvailable Columns:")
             for i, col in enumerate(columns, 1):
@@ -236,68 +250,33 @@ def remove_duplicates(df):
 
                 col_name = columns[col_no - 1]
 
-                dup_rows = df[df.duplicated(subset=[col_name], keep=False)]
-
-                if dup_rows.empty:
-                    print("✅ No duplicates found!")
-                else:
-                    print("\nDuplicate Rows:")
-                    print(dup_rows)
+                print(f"\n🔍 Grouped duplicates for column: {col_name}")
+                print_duplicate_groups(df, [col_name])
 
             except ValueError:
                 print("❌ Invalid column selection!")
 
-        # ---------- 2. Duplicate by MULTIPLE columns ----------
+        # -------- Multiple column grouping --------
         elif choice == '2':
             print("\nAvailable Columns:")
             for i, col in enumerate(columns, 1):
                 print(f"{i}. {col}")
 
-            print("\nEnter column numbers separated by comma (e.g., 1,3,5)")
+            print("\nEnter column numbers separated by comma (e.g. 1,3)")
             user_input = input("Enter choices: ")
 
             try:
-                col_indices = [int(i.strip()) for i in user_input.split(',')]
-                selected_cols = [columns[i - 1] for i in col_indices]
+                indices = [int(i.strip()) for i in user_input.split(',')]
+                group_cols = [columns[i - 1] for i in indices]
 
-                dup_rows = df[df.duplicated(subset=selected_cols, keep=False)]
-
-                if dup_rows.empty:
-                    print("✅ No duplicates found!")
-                else:
-                    print("\nDuplicate Rows based on", selected_cols)
-                    print(dup_rows)
+                print(f"\n🔍 Grouped duplicates for columns: {group_cols}")
+                print_duplicate_groups(df, group_cols)
 
             except:
-                print("❌ Invalid column input!")
+                print("❌ Invalid input!")
 
-        # ---------- 3. Duplicate COUNT ----------
+        # -------- Back --------
         elif choice == '3':
-            print("\nAvailable Columns:")
-            for i, col in enumerate(columns, 1):
-                print(f"{i}. {col}")
-
-            try:
-                col_no = int(input("Select column number: "))
-                if col_no < 1 or col_no > len(columns):
-                    raise ValueError
-
-                col_name = columns[col_no - 1]
-
-                counts = df[col_name].value_counts()
-                dup_counts = counts[counts > 1]
-
-                if dup_counts.empty:
-                    print("✅ No duplicates found!")
-                else:
-                    print("\nDuplicate Value Counts:")
-                    print(dup_counts)
-
-            except ValueError:
-                print("❌ Invalid column selection!")
-
-        # ---------- Back ----------
-        elif choice == '4':
             break
 
         else:
