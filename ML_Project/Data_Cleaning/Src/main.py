@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-from cleaning import handle_missing, remove_duplicates, handle_outliers
+from cleaning import handle_missing, handle_duplicates, handle_outliers
 from visualization import visualize
 
 
@@ -27,7 +27,7 @@ def menu():
     print("1. Show dataset info")
     print("2. Search Data")
     print("3. Handle missing values")
-    print("4. Remove duplicates")
+    print("4. Handle duplicates")
     print("5. Handle outliers")
     print("6. Data visualization")
     print("7. Save cleaned data")
@@ -97,7 +97,7 @@ while True:
     elif choice == '3':
         handle_missing(df)
     elif choice == '4':
-        remove_duplicates(df)
+        handle_duplicates(df)
     elif choice == '5':
         col = input("Enter column for outliers: ")
         df = handle_outliers(df, col)

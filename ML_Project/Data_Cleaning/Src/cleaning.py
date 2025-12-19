@@ -225,7 +225,7 @@ def print_duplicate_groups(df, group_cols):
         print("No duplicate groups found!")
 
 
-def remove_duplicates(df):
+def handle_duplicates(df):
     
     columns = df.columns.tolist()
 
