@@ -42,7 +42,7 @@ def show_info(df):
     
 def search_info(df):
     columns = df.columns.tolist()
-
+    pd.set_option('display.max_rows', None)
     # Show columns with numbers
     print("\nAvailable Columns:")
     for i, col in enumerate(columns, 1):
@@ -91,9 +91,9 @@ while True:
         pd.set_option('display.max_rows', None)
         print(df)
     elif choice == '1':
-        search_info(df)
-    elif choice == '2':
         show_info(df)
+    elif choice == '2':
+        search_info(df)
     elif choice == '3':
         handle_missing(df)
     elif choice == '4':
