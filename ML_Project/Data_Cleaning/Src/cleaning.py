@@ -296,10 +296,7 @@ def handle_outliers(df):
 
     while True:
         print("\n===== HANDLE OUTLIERS =====")
-        print("Available Numeric Columns:")
-        for i, col in enumerate(numeric_cols, 1):
-            print(f"{i}. {col}")
-
+        
         print("\nOptions:")
         print("1. Show outliers")
         print("2. Remove outliers")
@@ -312,66 +309,69 @@ def handle_outliers(df):
 
         if choice == '6':
             break
+        else:
+            try:
+                print("Available Numeric Columns:")
+                for i, col in enumerate(numeric_cols, 1):
+                    print(f"{i}. {col}")
+                col_no = int(input("Select column number: "))
+                if col_no < 1 or col_no > len(numeric_cols):
+                    raise ValueError
 
-        try:
-            col_no = int(input("Select column number: "))
-            if col_no < 1 or col_no > len(numeric_cols):
-                raise ValueError
+                col = numeric_cols[col_no - 1]
 
-            col = numeric_cols[col_no - 1]
+                # ----- IQR calculation -----
+                Q1 = df[col].quantile(0.25)
+                Q3 = df[col].quantile(0.75)
+                IQR = Q3 - Q1
 
-            # ----- IQR calculation -----
-            Q1 = df[col].quantile(0.25)
-            Q3 = df[col].quantile(0.75)
-            IQR = Q3 - Q1
+                lower = Q1 - 1.5 * IQR
+                upper = Q3 + 1.5 * IQR
 
-            lower = Q1 - 1.5 * IQR
-            upper = Q3 + 1.5 * IQR
+                outliers = df[(df[col] < lower) | (df[col] > upper)]
 
-            outliers = df[(df[col] < lower) | (df[col] > upper)]
+                # ----- Show outliers -----
+                if choice == '1':
+                    if outliers.empty:
+                        print("No outliers detected!")
+                    else:
+                        print("\nDetected Outliers:")
+                        print(outliers)
 
-            # ----- Show outliers -----
-            if choice == '1':
-                if outliers.empty:
-                    print("No outliers detected!")
+                # ----- Remove outliers -----
+                elif choice == '2':
+                    if outliers.empty:
+                        print("No outliers to remove!")
+                    else:
+                        df.drop(outliers.index, inplace=True)
+                        print("Outliers removed successfully!")
+
+                # ----- Cap outliers -----
+                elif choice == '3':
+                    if outliers.empty:
+                        print("No outliers to cap!")
+                    else:
+                        df[col] = df[col].clip(lower, upper)
+                        print("Outliers capped successfully!")
+
+                # ----- Replace with median -----
+                elif choice == '4':
+                    if outliers.empty:
+                        print("No outliers to replace!")
+                    else:
+                        median = df[col].median()
+                        df.loc[df[col] < lower, col] = median
+                        df.loc[df[col] > upper, col] = median
+                        print("Outliers replaced with median!")
+
+                # ----- Boxplot -----
+                elif choice == '5':
+                    sns.boxplot(x=df[col])
+                    plt.title(f"Outlier Visualization: {col}")
+                    plt.show()
+
                 else:
-                    print("\nDetected Outliers:")
-                    print(outliers)
+                    print("Enter correct choice!")
 
-            # ----- Remove outliers -----
-            elif choice == '2':
-                if outliers.empty:
-                    print("No outliers to remove!")
-                else:
-                    df.drop(outliers.index, inplace=True)
-                    print("Outliers removed successfully!")
-
-            # ----- Cap outliers -----
-            elif choice == '3':
-                if outliers.empty:
-                    print("No outliers to cap!")
-                else:
-                    df[col] = df[col].clip(lower, upper)
-                    print("Outliers capped successfully!")
-
-            # ----- Replace with median -----
-            elif choice == '4':
-                if outliers.empty:
-                    print("No outliers to replace!")
-                else:
-                    median = df[col].median()
-                    df.loc[df[col] < lower, col] = median
-                    df.loc[df[col] > upper, col] = median
-                    print("Outliers replaced with median!")
-
-            # ----- Boxplot -----
-            elif choice == '5':
-                sns.boxplot(x=df[col])
-                plt.title(f"Outlier Visualization: {col}")
-                plt.show()
-
-            else:
-                print("Enter correct choice!")
-
-        except ValueError:
-            print("Invalid column selection!")
+            except ValueError:
+                print("Invalid column selection!")

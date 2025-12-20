@@ -38,7 +38,7 @@ def show_info(df):
     print("\nDataset Info : \n")
     print(df.info())
     print("\nMissing Values: \n")
-    print(df.isna().sum()[df.isna().sum() > 0])\
+    print(df.isna().sum()[df.isna().sum() > 0])
     
 def search_info(df):
     columns = df.columns.tolist()
@@ -99,8 +99,7 @@ while True:
     elif choice == '4':
         handle_duplicates(df)
     elif choice == '5':
-        col = input("Enter column for outliers: ")
-        df = handle_outliers(df, col)
+        df = handle_outliers(df)
     elif choice == '6':
         visualize(df)
     elif choice == '7':
