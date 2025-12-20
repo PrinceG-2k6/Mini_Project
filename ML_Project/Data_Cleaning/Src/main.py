@@ -113,7 +113,7 @@ def edit_data(df):
                 col = int(input("Column number: ")) - 1
 
                 if row not in df.index or col not in range(len(df.columns)):
-                    print("❌ Invalid row or column!")
+                    print("Invalid row or column!")
                     continue
 
                 col_name = df.columns[col]
@@ -124,10 +124,10 @@ def edit_data(df):
                     val = float(val)
 
                 df.at[row, col_name] = val
-                print("✅ Cell updated!")
+                print("Cell updated!")
 
             except:
-                print("❌ Invalid input!")
+                print("Invalid input!")
 
         # --------------------------------------------------
         # 2. EDIT ENTIRE ROW
@@ -136,7 +136,7 @@ def edit_data(df):
             try:
                 row = int(input("Row index (0-based): "))
                 if row not in df.index:
-                    print("❌ Invalid row!")
+                    print("Invalid row!")
                     continue
 
                 print("\nCurrent Row:")
@@ -155,10 +155,10 @@ def edit_data(df):
 
                     df.at[row, col] = new
 
-                print("✅ Row updated!")
+                print("Row updated!")
 
             except:
-                print("❌ Invalid input!")
+                print("Invalid input!")
 
         # --------------------------------------------------
         # 3. EDIT ENTIRE COLUMN
@@ -170,7 +170,7 @@ def edit_data(df):
 
                 col = int(input("Column number: ")) - 1
                 if col not in range(len(df.columns)):
-                    print("❌ Invalid column!")
+                    print("Invalid column!")
                     continue
 
                 col_name = df.columns[col]
@@ -180,10 +180,10 @@ def edit_data(df):
                     val = float(val)
 
                 df[col_name] = val
-                print("✅ Column updated!")
+                print("Column updated!")
 
             except:
-                print("❌ Invalid input!")
+                print("Invalid input!")
 
         # --------------------------------------------------
         # 4. DELETE SINGLE CELL
@@ -194,14 +194,14 @@ def edit_data(df):
                 col = int(input("Column number: ")) - 1
 
                 if row not in df.index or col not in range(len(df.columns)):
-                    print("❌ Invalid row or column!")
+                    print("Invalid row or column!")
                     continue
 
                 df.at[row, df.columns[col]] = np.nan
-                print("✅ Cell cleared (NaN)!")
+                print("Cell cleared (NaN)!")
 
             except:
-                print("❌ Invalid input!")
+                print("Invalid input!")
 
         # --------------------------------------------------
         # 5. DELETE SINGLE ROW
@@ -210,15 +210,15 @@ def edit_data(df):
             try:
                 row = int(input("Row index to delete: "))
                 if row not in df.index:
-                    print("❌ Invalid row!")
+                    print("Invalid row!")
                     continue
 
                 df.drop(index=row, inplace=True)
                 df.reset_index(drop=True, inplace=True)
-                print("✅ Row deleted!")
+                print("Row deleted!")
 
             except:
-                print("❌ Invalid input!")
+                print("Invalid input!")
 
         # --------------------------------------------------
         # 6. BULK DELETE ROWS
@@ -230,20 +230,20 @@ def edit_data(df):
 
                 invalid = [r for r in rows if r not in df.index]
                 if invalid:
-                    print("❌ Invalid rows:", invalid)
+                    print("Invalid rows:", invalid)
                     continue
 
                 confirm = input(f"Confirm delete {rows}? (y/n): ").lower()
                 if confirm != 'y':
-                    print("❌ Cancelled!")
+                    print("Cancelled!")
                     continue
 
                 df.drop(index=rows, inplace=True)
                 df.reset_index(drop=True, inplace=True)
-                print("✅ Rows deleted!")
+                print("Rows deleted!")
 
             except:
-                print("❌ Invalid input!")
+                print("Invalid input!")
 
         # --------------------------------------------------
         # 7. DELETE ENTIRE COLUMN
@@ -255,14 +255,14 @@ def edit_data(df):
 
                 col = int(input("Column number to delete: ")) - 1
                 if col not in range(len(df.columns)):
-                    print("❌ Invalid column!")
+                    print("Invalid column!")
                     continue
 
                 df.drop(columns=[df.columns[col]], inplace=True)
-                print("✅ Column deleted!")
+                print("Column deleted!")
 
             except:
-                print("❌ Invalid input!")
+                print("Invalid input!")
 
         # --------------------------------------------------
         # BACK
@@ -271,7 +271,7 @@ def edit_data(df):
             break
 
         else:
-            print("❌ Enter correct choice!")
+            print("Enter correct choice!")
 
 
 while True:
@@ -297,6 +297,9 @@ while True:
         visualize(df)
     elif choice == '8':
         df.to_csv("./ML_Project/Data_Cleaning/Data/cleaned.csv", index=False)
+        print("\n=================================")
+        print("!! Your CSV File is saved !!\nHave Fun !!")
+        print("=================================\n")
     elif choice == '9':
         print("\n=================================")
         print("!! Thank You for your time !!")
