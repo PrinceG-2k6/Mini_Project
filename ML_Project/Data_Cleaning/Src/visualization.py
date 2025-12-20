@@ -68,9 +68,9 @@ def ask_save_plot(default_name="plot"):
     if choice == 'y':
         filename = input(f"Enter filename (default: {default_name}.png): ").strip()
         if filename == "":
-            filename = default_name
+            filename = f"./ML_Project/Data_Cleaning/Plot/{default_name}.png"
         if not filename.endswith(".png"):
-            filename += ".png"
+            filename = f"./ML_Project/Data_Cleaning/Plot/{filename}.png"
         plt.savefig(filename, dpi=300, bbox_inches='tight')
         print(f"✅ Plot saved as {filename}")
 
