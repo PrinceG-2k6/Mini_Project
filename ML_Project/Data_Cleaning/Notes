@@ -7,3 +7,6 @@ like searching mr will search both data "Mr Prince" and "Mr Baary"
 helps to dividing dataframe into groups on basis of same value it contains. 
 .Its also in our hand to decide on which column Duplicate value should group by
 “I identify duplicates using groupby-filter and present them group-wise, which improves interpretability over flat duplicate lists.” 
+
+
+I detect outliers using the IQR method and provide multiple handling strategies like removal, capping, and median replacement, allowing safe and user-controlled preprocessing.”
