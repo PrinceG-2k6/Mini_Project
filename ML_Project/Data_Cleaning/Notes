@@ -10,3 +10,11 @@ helps to dividing dataframe into groups on basis of same value it contains.
 
 
 I detect outliers using the IQR method and provide multiple handling strategies like removal, capping, and median replacement, allowing safe and user-controlled preprocessing.”
+
+“I implemented a menu-driven visualization system with strict datatype validation, column-count checks, and safe exception handling to ensure robust plotting for any uploaded dataset.”
+
+“I implemented optional plot saving and multi-column visualization with datatype validation to ensure flexible and safe exploratory analysis.”
+
+“I added theme selection, automatic legends, and standardized plot styling to make visualizations both user-friendly and presentation-ready.”
+
+“I built a robust, menu-driven visualization engine with datatype validation, multi-plot support, theming, and safe exception handling for any dataset.”
