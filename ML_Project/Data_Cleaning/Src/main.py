@@ -103,7 +103,7 @@ while True:
     elif choice == '6':
         visualize(df)
     elif choice == '7':
-        df.to_csv("data/cleaned.csv", index=False)
+        df.to_csv("Data/cleaned.csv", index=False)
     elif choice == '8':
         break
     else:
