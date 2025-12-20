@@ -8,16 +8,13 @@ from visualization import visualize
 
 
 
-# path = input("Enter CSV file path \n(Try 'Titanic' OR Enter Path if you have CSV) : ")
-# df = None
-# if path.lower() == "titanic":
-#     path = "./ML_Project/Data_Cleaning/Src/Titanic.csv"
-#     df = pd.read_csv(path)
-# else:
-#     df = pd.read_csv(path)
-
-path = "./ML_Project/Data_Cleaning/Src/Titanic.csv"
-df = pd.read_csv(path)
+path = input("Enter CSV file path \n(Try 'Titanic' OR Enter Path if you have CSV) : ")
+df = None
+if path.lower() == "titanic":
+    path = "./ML_Project/Data_Cleaning/Src/Titanic.csv"
+    df = pd.read_csv(path)
+else:
+    df = pd.read_csv(path)
 
 print("\nFile uploaded successfully!")
 
