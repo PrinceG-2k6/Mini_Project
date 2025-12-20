@@ -45,7 +45,7 @@ def apply_theme():
     else:
         sns.set_theme(style=theme)
 
-    print(f"✅ Theme applied: {theme}")
+    print(f"Theme applied: {theme}")
 
 
 def apply_legend():
@@ -72,7 +72,7 @@ def ask_save_plot(default_name="plot"):
         if not filename.endswith(".png"):
             filename = f"./ML_Project/Data_Cleaning/Plot/{filename}.png"
         plt.savefig(filename, dpi=300, bbox_inches='tight')
-        print(f"✅ Plot saved as {filename}")
+        print(f"Plot saved as {filename}")
 
 
 def get_column(df, min_c, max_c):
@@ -89,17 +89,17 @@ def get_column(df, min_c, max_c):
             index_list = [int(i.strip()) for i in ch.split(',')]
 
             if len(index_list) < min_c or len(index_list) > max_c:
-                print("❌ Invalid number of columns selected!")
+                print("Invalid number of columns selected!")
                 continue
 
             if not is_valid_index_list(index_list, df):
-                print("❌ Column index out of range!")
+                print("Column index out of range!")
                 continue
 
             return index_list
 
         except ValueError:
-            print("❌ Enter only numbers separated by commas!")
+            print("Enter only numbers separated by commas!")
 
 
 # ================== VISUALIZATION ==================
@@ -127,7 +127,7 @@ def visualize(df):
                 numeric_cols = [c for c in cols if c in get_numeric_columns(df)]
 
                 if not numeric_cols:
-                    print("❌ Histogram requires numeric columns!")
+                    print("Histogram requires numeric columns!")
                     continue
 
                 apply_theme()
@@ -146,7 +146,7 @@ def visualize(df):
                 numeric_cols = [c for c in cols if c in get_numeric_columns(df)]
 
                 if not numeric_cols:
-                    print("❌ Box plot requires numeric columns!")
+                    print("Box plot requires numeric columns!")
                     continue
 
                 apply_theme()
@@ -161,7 +161,7 @@ def visualize(df):
                 x, y = df.columns[idx[0]-1], df.columns[idx[1]-1]
 
                 if x not in get_numeric_columns(df) or y not in get_numeric_columns(df):
-                    print("❌ Scatter plot requires two numeric columns!")
+                    print("Scatter plot requires two numeric columns!")
                     continue
 
                 apply_theme()
@@ -178,7 +178,7 @@ def visualize(df):
                 numeric_cols = [c for c in cols if c in get_numeric_columns(df)]
 
                 if not numeric_cols:
-                    print("❌ Line plot requires numeric columns!")
+                    print("Line plot requires numeric columns!")
                     continue
 
                 apply_theme()
@@ -196,7 +196,7 @@ def visualize(df):
                 col = df.columns[idx[0]-1]
 
                 if col not in get_categorical_columns(df):
-                    print("❌ Count plot requires categorical column!")
+                    print("Count plot requires categorical column!")
                     continue
 
                 apply_theme()
@@ -217,7 +217,7 @@ def visualize(df):
                 else:
                     x, y = df.columns[idx[0]-1], df.columns[idx[1]-1]
                     if y not in get_numeric_columns(df):
-                        print("❌ Bar plot requires numeric Y column!")
+                        print("Bar plot requires numeric Y column!")
                         continue
                     sns.barplot(x=df[x], y=df[y])
                     finalize_plot("Bar Plot", x, y)
@@ -238,7 +238,7 @@ def visualize(df):
                 break
 
             else:
-                print("❌ Enter correct choice!")
+                print("Enter correct choice!")
 
         except Exception as e:
             print(f"⚠️ Plot failed safely: {e}")
