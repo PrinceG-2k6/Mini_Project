@@ -11,7 +11,7 @@ from visualization import visualize
 path = input("Enter CSV file path \n(Try 'Titanic' OR Enter Path if you have CSV) : ")
 df = None
 if path.lower() == "titanic":
-    path = "./ML_Project/Data_Cleaning/Src/Titanic.csv"
+    path = "./ML_Project/Movie_Rating/Src/Titanic.csv"
     df = pd.read_csv(path)
 else:
     df = pd.read_csv(path)
@@ -293,7 +293,7 @@ while True:
     elif choice == '7':
         visualize(df)
     elif choice == '8':
-        df.to_csv("./ML_Project/Data_Cleaning/Data/cleaned.csv", index=False)
+        df.to_csv("./ML_Project/Movie_Rating/Data/cleaned.csv", index=False)
         print("\n=================================")
         print("!! Your CSV File is saved !!\nHave Fun !!")
         print("=================================\n")
