@@ -8,7 +8,7 @@ from visualization import visualize
 
 
 
-path = input("Enter CSV file path \n(Try 'Titanic' OR Enter Path if you have CSV) : ")
+path = input("Enter CSV file path \n(Try 'Movies' OR Enter Path if you have CSV) : ")
 df = None
 if path.lower() == "titanic":
     path = "./ML_Project/Movie_Rating/Src/Titanic.csv"
@@ -22,7 +22,6 @@ print("\nFile uploaded successfully!")
   
 def menu():
     print("\n===== DATA CLEANING MENU =====")
-    print("0. Show All Data")
     print("1. Show dataset info")
     print("2. Search Data")
     print("3. Modify Data")
@@ -37,7 +36,7 @@ def menu():
 def show_info(df):
     print("\nDataset Info : \n")
     print(df.info())
-    print("\nMissing Values: \n")
+    print("\nMissing Values:")
     print(df.isna().sum()[df.isna().sum() > 0])
     
 def search_info(df):
