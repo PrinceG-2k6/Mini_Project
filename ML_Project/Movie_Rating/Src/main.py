@@ -10,8 +10,8 @@ from visualization import visualize
 
 path = input("Enter CSV file path \n(Try 'Movies' OR Enter Path if you have CSV) : ")
 df = None
-if path.lower() == "titanic":
-    path = "./ML_Project/Movie_Rating/Src/Titanic.csv"
+if path.lower() == "movies":
+    path = "./ML_Project/Movie_Rating/Src/Movies.csv"
     df = pd.read_csv(path)
 else:
     df = pd.read_csv(path)
@@ -274,10 +274,7 @@ while True:
     menu()
     choice = input("Enter choice: ")
 
-    if choice == '0':
-        pd.set_option('display.max_rows', None)
-        print(df)
-    elif choice == '1':
+    if choice == '1':
         show_info(df)
     elif choice == '2':
         search_info(df)

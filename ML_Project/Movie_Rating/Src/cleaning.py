@@ -17,11 +17,10 @@ def has_all_nan_columns(df):
 
 def menu1():
     print("\n===== HANDLIING MISSING VALUE =====")
-    print("1. Show All Missing Column")
-    print("2. Show All Missing Row")
-    print("3. Fill Missing Values")
-    print("4. Drop Missing Values")
-    print("5. Back")
+    print("1. Show All Missing Row")
+    print("2. Fill Missing Values")
+    print("3. Drop Missing Values")
+    print("4. Back")
 
 def menu2():
     print("\n===== Filling MISSING VALUE =====")
@@ -50,16 +49,11 @@ def handle_missing(df):
         menu1()
         choice = input("Enter choice: ")
 
-        # ---------- Show Missing Columns ----------
         if choice == '1':
-            print(df[nan_columns_list])
-
-        # ---------- Show Missing Rows ----------
-        elif choice == '2':
             print(df[df.isna().any(axis=1)])
 
         # ---------- Fill Missing Values ----------
-        elif choice == '3':
+        elif choice == '2':
 
             while True:
                 menu2()
@@ -180,7 +174,7 @@ def handle_missing(df):
                     print("Invalid choice!")
 
         # ---------- Drop Missing Values ----------
-        elif choice == '4':
+        elif choice == '3':
 
             if not has_nan(df):
                 print("No missing values to drop!")
@@ -202,7 +196,7 @@ def handle_missing(df):
                 print("Invalid choice!")
 
         # ---------- Back ----------
-        elif choice == '5':
+        elif choice == '4':
             break
 
         else:
