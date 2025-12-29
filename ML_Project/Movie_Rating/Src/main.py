@@ -8,17 +8,18 @@ from visualization import visualize
 
 
 
-path = input("Enter CSV file path \n(Try 'Movies' OR Enter Path if you have CSV) : ")
-df = None
-if path.lower() == "movies":
-    path = "./ML_Project/Movie_Rating/Src/Movies.csv"
-    df = pd.read_csv(path)
-else:
-    df = pd.read_csv(path)
+# path = input("Enter CSV file path \n(Try 'Movies' OR Enter Path if you have CSV) : ")
+# df = None
+# if path.lower() == "movies":
+#     path = "./ML_Project/Movie_Rating/Src/Movies.csv"
+#     df = pd.read_csv(path)
+# else:
+#     df = pd.read_csv(path)
 
-print("\nFile uploaded successfully!")
+# print("\nFile uploaded successfully!")
 
-
+path = "./ML_Project/Movie_Rating/Src/Movies.csv"
+df = pd.read_csv(path)
   
 def menu():
     print("\n===== DATA CLEANING MENU =====")

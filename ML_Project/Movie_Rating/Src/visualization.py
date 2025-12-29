@@ -56,11 +56,11 @@ def apply_theme():
 def apply_legend():
     handles, labels = plt.gca().get_legend_handles_labels()
     if labels:
-        plt.legend(title="Legend", loc="best")
+        plt.legend(Title="Legend", loc="best")
 
 
-def finalize_plot(title, xlabel=None, ylabel=None):
-    plt.title(title, fontsize=14)
+def finalize_plot(Title, xlabel=None, ylabel=None):
+    plt.title(Title, fontsize=14)
     if xlabel:
         plt.xlabel(xlabel)
     if ylabel:
@@ -108,6 +108,64 @@ def get_column(df, min_c, max_c):
 
 
 # ================== VISUALIZATION ==================
+def dataset_summary(df):
+    print("\n===== DATASET SUMMARY =====")
+
+    # Drop rows with missing critical values
+    clean_df = df.dropna(subset=['Rating', 'Genre', 'Year', 'Title'])
+
+    if clean_df.empty:
+        print("Not enough valid data to generate summary.")
+        return
+
+    total_movies = len(clean_df)
+    avg_rating = clean_df['Rating'].mean()
+
+    highest = clean_df.loc[clean_df['Rating'].idxmax()]
+    lowest = clean_df.loc[clean_df['Rating'].idxmin()]
+
+    common_genre = clean_df['Genre'].mode()[0]
+
+    min_year = clean_df['Year'].min()
+    max_year = clean_df['Year'].max()
+
+    print(f"Total Movies       : {total_movies}")
+    print(f"Average Rating     : {avg_rating:.2f}")
+    print(f"Most Common Genre  : {common_genre}")
+    print(f"Year Range         : {min_year} - {max_year}")
+
+    print("\nTop Rated Movie:")
+    print(f"Title  : ",highest['Title'])
+    print(f"Rating : ",highest['Rating'])
+
+    print("\nLowest Rated Movie:")
+    print(f"Title  : ",lowest['Title'])
+    print(f"Rating : ",lowest['Rating'])
+
+def rating_distrubution(df):
+    print(1)
+
+def genre_analysis(df):
+    print(1)
+
+def votes_vs_rating(df):
+    print(1)
+
+
+def rating_trend(df):
+    print(1)
+
+
+def top_rated(df):
+    print(1)
+
+
+def coorelation_analysis(df):
+    print(1)
+
+
+def filter_year(df):
+    print(1)
 
 def visualize(df):
 
@@ -128,37 +186,17 @@ def visualize(df):
         try:
             # -------- DATASET SUMMARY --------
             if ch == '1':
-                idx = get_column(df, 1, 5)
-                cols = [df.columns[i-1] for i in idx]
-                numeric_cols = [c for c in cols if c in get_numeric_columns(df)]
+                dataset_summary(df)
 
-                if not numeric_cols:
-                    print("Histogram requires numeric columns!")
-                    continue
-
-                apply_theme()
-                for col in numeric_cols:
-                    sns.histplot(df[col].dropna(), kde=True, label=col, alpha=0.6)
-
-                finalize_plot("Histogram", ylabel="Frequency")
-                apply_legend()
-                ask_save_plot("histogram")
-                plt.show()
-
-            # -------- BOX PLOT --------
+            # -------- RATING DISTRUBUTION --------
             elif ch == '2':
-                idx = get_column(df, 1, 5)
-                cols = [df.columns[i-1] for i in idx]
-                numeric_cols = [c for c in cols if c in get_numeric_columns(df)]
-
-                if not numeric_cols:
-                    print("Box plot requires numeric columns!")
-                    continue
-
+                cols = ["Rating","Year"]
+                validate_columns(df,cols)
+                
                 apply_theme()
-                sns.boxplot(data=df[numeric_cols])
-                finalize_plot("Box Plot (Outliers)")
-                ask_save_plot("box_plot")
+                sns.histplot(data=df[cols])
+                finalize_plot("Rating Distrubution")
+                ask_save_plot("Rating_Distrubution")
                 plt.show()
 
             # -------- SCATTER --------
