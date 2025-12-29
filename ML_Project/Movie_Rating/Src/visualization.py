@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import os
 
 
 # ================== HELPERS ==================
@@ -15,6 +16,10 @@ def get_categorical_columns(df):
 def is_valid_index_list(index_list, df):
     return all(1 <= i <= len(df.columns) for i in index_list)
 
+def validate_columns(df, cols):
+    for col in cols:
+        if col not in df.columns:
+            raise ValueError(f"Missing column: {col}")
 
 def apply_theme():
     print("\nSelect Plot Theme:")
@@ -108,19 +113,20 @@ def visualize(df):
 
     while True:
         print("\n===== DATA VISUALIZATION MENU =====")
-        print("1. Histogram (Numeric Column)")
-        print("2. Box Plot (Outlier Detection)")
-        print("3. Scatter Plot (Two Numeric Columns)")
-        print("4. Line Plot")
-        print("5. Count Plot (Categorical Column)")
-        print("6. Bar Plot")
-        print("7. Missing Value Heatmap")
-        print("8. Back")
+        print("1. Dataset Summary")
+        print("2. Rating Distribution")
+        print("3. Genre Analysis")
+        print("4. Votes vs Rating")
+        print("5. Rating Trend by Year")
+        print("6. Top Rated Movies")
+        print("7. Correlation Analysis")
+        print("8. Filter by Year Range")
+        print("9. Back")
 
         ch = input("Select Graph: ")
 
         try:
-            # -------- HISTOGRAM --------
+            # -------- DATASET SUMMARY --------
             if ch == '1':
                 idx = get_column(df, 1, 5)
                 cols = [df.columns[i-1] for i in idx]
