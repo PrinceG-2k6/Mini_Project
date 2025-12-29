@@ -1,4 +1,4 @@
-Series_Title,Released_Year,Certificate,Runtime,Genre,IMDB_Rating,No_of_Votes
+Title,Year,Certificate,Runtime,Genre,IMDB_Rating,Votes
 The Shawshank Redemption,1994,A,142 min,Drama,9.3,2343110
 The Godfather,1972,A,175 min,"Crime, Drama",,1620367
 The Dark Knight,2008,UA,152 min,"Action, Crime, Drama",9,2303232
